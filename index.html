@@ -113,6 +113,16 @@
       color: #BDFF20; /* Green */
     }
 
+
+#about::before {
+  content: "";
+  display: block;
+  height: 120px;       /* same as your header height */
+  margin-top: -120px;  /* pulls the real section back up */
+  visibility: hidden;
+}
+
+    
     /* ── ABOUT & MISSION CARDS ── */
     .mobile-card { /* Card wrapper */
       background: #333; /* Dark grey */
