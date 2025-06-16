@@ -251,7 +251,15 @@
   justify-content: center;
   align-items: center;
 }
-    
+
+    /* ONLY resize the avatar circle for Samar & Niel */
+.team-card.samar .avatar,
+.team-card.niel .avatar {
+  width: 80px;     /* new diameter */
+  height: 80px;    /* new diameter */
+  /* border-radius stays 50% to keep it circular */
+  margin: 0 auto 12px; /* adjust bottom spacing if needed */
+}
     
 
     /* ── CONTACT ROWS (split into two separate rows) ── */  
