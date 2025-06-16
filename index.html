@@ -27,11 +27,12 @@
       top: 0; left: 0; width: 100%; /* Full-width, pinned to top-left */
       z-index: 100; /* Appear above other content */
 
-      /*this block will make the header semi-transparent and blur the background*/
+/*this block will make the header semi-transparent and blur the background*/
 
       background: rgba(0, 0, 0, 0.3);    /* semi-transparent black */
   backdrop-filter: blur(10px);       /* blur everything behind */
   -webkit-backdrop-filter: blur(10px); /* for Safari */
+
     }
     .logo { /* Logo text */
       color: #BDFF20; /* Bright green */
@@ -105,24 +106,29 @@
     /* ── SECTION NAV LABEL ── */
     .section-nav { /* Section labels */
       text-align: center; /* Center text */
-      font-size: 1rem; /* Normal font */
-      color: #fff; /* White */
-      margin: 20px 0; /* Vertical spacing */
+      font-size: 1.7rem; /* Normal font */
+      color: #BDFF20; /* White */
+      margin: 25px 0; /* Vertical spacing */
     }
     .section-nav b { /* Bold part of label */
       color: #BDFF20; /* Green */
     }
 
 
-#about::before {
+/* 1. Modern: give #know-gv breathing room under the fixed header */
+#know-gv { /* Section ID for "Know GameVault" */
+  scroll-margin-top: 112px; /* <-- match this to your header height */
+}
+
+/* 2. Fallback: only when #know-gv is the :target (i.e. you just jumped to it) */
+#know-gv:target::before {
   content: "";
   display: block;
-  height: 120px;       /* same as your header height */
-  margin-top: -120px;  /* pulls the real section back up */
+  height: 112px;       /* same as your header’s height */
+  margin-top: -112px;  /* pull the real content up */
   visibility: hidden;
 }
 
-    
     /* ── ABOUT & MISSION CARDS ── */
     .mobile-card { /* Card wrapper */
       background: #333; /* Dark grey */
@@ -166,6 +172,24 @@
       margin-bottom: 8px; /* Spacing */
       line-height: 1.3; /* Readable */
     }
+
+
+
+/* 1. Modern: give #events breathing room under the fixed header */
+#events { /* Section ID for "Know GameVault" */
+  scroll-margin-top: 60px; /* <-- match this to your header height */
+}
+
+/* 2. Fallback: only when #events is the :target (i.e. you just jumped to it) */
+#events:target::before {
+  content: "";
+  display: block;
+  height: 60px;       /* same as your header’s height */
+  margin-top: -60px;  /* pull the real content up */
+  visibility: hidden;
+}
+
+
 
     /* ── OUR EVENTS ── */
     .event-card { /* Event card container */
@@ -325,32 +349,36 @@
 
   <!-- NAV MENU (hidden by default) -->
   <div class="nav-menu" id="menu"> <!-- Slide-in menu panel -->
-    <a href="#home">Home</a> <!-- Scroll to hero -->
-    <a href="#about">Know GV</a> <!-- Scroll to about -->
+    <a href="#Home">Home</a> <!-- Scroll to hero -->
+    <a href="#know-gv">Know GV</a> <!-- Scroll to about -->
     <a href="#events">Our Events</a> <!-- Scroll to events -->
-    <a href="#team">GV Team</a> <!-- Scroll to team -->
-    <a href="#contact">Contact Us</a> <!-- Scroll to contact -->
+    <a href="#GV Teams">GV Team</a> <!-- Scroll to team -->
+    <a href="#contact Us">Contact Us</a> <!-- Scroll to contact -->
   </div>
 
   <!-- MAIN CONTENT -->
   <main> <!-- Wrapper for scrollable content -->
 
     <!-- HERO SECTION -->
-    <section class="hero" id="home"> <!-- Hero intro -->
+    <section class="hero" id="Home"> <!-- Hero intro -->
       <h1>
         Want to<br>
         <span class="highlight">Know</span><br>
         GameVault?
       </h1>
-      <p>Transforming esports into a healthier, more inclusive, and truly engaging experience.</p>
-      <a href="#about" class="btn">Dive In!!</a> <!-- Button scrolls to about -->
+      <p>Transforming esports into a healthier,</p> 
+        <p>more inclusive, and truly</p> 
+        <p>engaging experience.</p>
+      <a href="#know-gv" class="btn">Dive In!!</a> <!-- Button scrolls to about -->
     </section>
 
     <!-- KNOW GAMEVAULT LABEL -->
     <div class="section-nav">△ <b>Know GameVault</b> △</div>
 
     <!-- ABOUT US CARD -->
-    <section class="mobile-card" id="about">
+         <section id="Know GV"> <!-- Contact section anchor -->
+
+<section class="mobile-card" id="know-gv">
       <h2>ABOUT US</h2>
       <p>
         At GameVault, we believe competitive gaming should elevate – not overwhelm – its community. We are on a mission to foster a transparent, informative, and non-addictive E-Sports ecosystem, where thrill and skill go hand in hand with mental well-being.
@@ -406,6 +434,8 @@
     </section>
 
     <!-- GV TEAM SECTION -->
+    <section id="GV Teams"> <!-- Contact section anchor -->
+
     <div class="section-nav">◀ GV Team ▶</div>
     <section class="team-grid" id="team">
       <div class="team-card samar"> <!-- Added class “samar” for individual targeting -->
@@ -448,8 +478,8 @@
     </section>
 
     <!-- CONTACT US SECTION -->
-    <section id="contact"> <!-- Contact section anchor -->
-      <h1 style="color: #BDFF20; text-align: center; margin: 20px 0;">Contact US</h1> <!-- ← added -->
+    <section id="contact Us"> <!-- Contact section anchor -->
+      <h1 style="color: #BDFF20; text-align: center; margin: 20px 0;">Contact Us</h1> <!-- ← added -->
       <div class="card"> <!-- ← added -->
         <a href="#" class="form-button">Tap here google form link</a> <!-- ← added -->
         <div class="socials"> <!-- ← added -->
