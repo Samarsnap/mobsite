@@ -252,15 +252,16 @@
   align-items: center;
 }
 
-    /* ONLY resize the avatar circle for Samar & Niel */
+/* —————— Samar & Niel: perfect symmetric avatars —————— */
 .team-card.samar .avatar,
 .team-card.niel .avatar {
-  width: 80px;     /* new diameter */
-  height: 80px;    /* new diameter */
-  /* border-radius stays 50% to keep it circular */
-  margin: 0 auto 12px; /* adjust bottom spacing if needed */
+  width: 80px;           /* exact square width */
+  height: 80px;          /* exact square height */
+  border-radius: 100%;    /* makes the square a circle */
+  margin: auto;   /* center + bottom spacing */
+  box-sizing: border-box;/* include any border/padding in the size */
 }
-    
+ 
 
     /* ── CONTACT ROWS (split into two separate rows) ── */  
 
