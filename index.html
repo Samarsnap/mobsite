@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Ensures proper scaling on mobile -->
   <title>GameVault Mobile Prototype</title> <!-- Page title shown in browser tab -->
 
-
   <style> 
 
     /* ── GLOBAL RESET & BASE ── */
@@ -72,7 +71,7 @@
     .hero { /* Hero section */
       background: #666; /* Medium grey */
       text-align: center; /* Center-align text */
-      padding: 120px 20px; /* 60px vertical, 20px horizontal */
+      padding: 120px 20px; /* 120px vertical, 20px horizontal */
     }
     .hero h1 { /* Hero headline */
       font-size: 2rem; /* 2× root font-size */
@@ -204,6 +203,35 @@
       line-height: 1.2; /* Readable */
     }
 
+    /* ONLY enlarge Samar & Niel’s cards */
+    .team-card.samar,
+    .team-card.niel { /* ← added */
+      width: 140px;      /* exact width for those two */ /* ← added */
+      height: 160px;     /* exact height for those two */ /* ← added */
+      padding: 20px;     /* extra inner spacing */ /* ← added */
+      display: flex;     /* center contents vertically */ /* ← added */
+      flex-direction: column; /* ← added */
+      justify-content: center; /* ← added */
+      align-items: center; /* ← added */
+    }
+
+    /* Samar & Niel: perfect symmetric avatars */
+    .team-card.samar .avatar,
+    .team-card.niel .avatar { /* ← added */
+      width: 80px;        /* exact square width */ /* ← added */
+      height: 80px;       /* exact square height */ /* ← added */
+      border-radius: 50%; /* perfect circle */ /* ← added */
+      margin: 0 auto 12px; /* center + bottom spacing */ /* ← added */
+      box-sizing: border-box; /* include padding in size */ /* ← added */
+    }
+
+    .team-card.niel { /* tweak horizontal offset */ /* ← added */
+      margin-right: -40px; /* ← added */
+    }
+    .team-card.samar { /* tweak horizontal offset */ /* ← added */
+      margin-left: 40px; /* ← added */
+    }
+
     /* ── GAMERS TEAM ── */
     .gamers-grid { /* Gamers grid layout */
       display: grid; /* CSS grid */
@@ -230,73 +258,41 @@
       line-height: 1.2; /* Readable */
     }
 
-
-    /* ONLY enlarge Samar & Niel’s cards */
-.team-card.samar,
-.team-card.niel {
-  width: 140px;      /* exact width for those two */
-  height: 160px;     /* exact height for those two */
-  padding: 20px;     /* extra inner spacing */
-  /* if you need to keep their contents centered: */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* —————— Samar & Niel: perfect symmetric avatars —————— */
-.team-card.samar .avatar,
-.team-card.niel .avatar {
-  width: 80px;           /* exact square width */
-  height: 80px;          /* exact square height */
-  border-radius: 100%;    /* makes the square a circle */
-  margin: auto;   /* center + bottom spacing */
-  box-sizing: border-box;/* include any border/padding in the size */
-}
-
-    .team-card.niel {
-  margin-right: -40px;
-}
-.team-card.samar {
-  margin-left: 40px;
-}
-
-
-    /* ── CONTACT ROWS (split into two separate rows) ── */  
-
-    
-    /* Newly added: two distinct rows for partnership and support */
-    .contact-row { /* Contact row styling */
-      margin: 12px 20px; /* Vertical and horizontal margin */
-      font-size: 0.85rem; /* Slightly smaller text */
-      display: flex; /* Inline flex for label+text */
-      align-items: center; /* Vertically center contents */
+    /* ── CONTACT US CARD ── */
+    :root { /* color variables */ /* ← added */
+      --green: #BDFF20; /* ← added */
+      --card-bg: #1a1a1a; /* ← added */
     }
-    .contact-row .label { /* Label within contact row */
-      font-weight: 600; /* Semi-bold */
-      margin-right: 8px; /* Space after label */
+    .card { /* container for Contact */ /* ← added */
+      background: var(--card-bg); /* ← added */
+      border-radius: 20px; /* ← added */
+      padding: 24px 16px; /* ← added */
+      margin: 20px; /* vertical spacing */ /* ← added */
     }
-
-
-    /* ── SOCIALS PANEL ── */
-    .social-panel { /* Social icons/text box */
-      background: #333; /* Dark grey */
-      border-radius: 8px; /* Rounded corners */
-      margin: 0 20px 20px; /* Spacing */
-      padding: 12px; /* Internal padding */
-      text-align: center; /* Center text */
-      font-size: 0.9rem; /* Slightly smaller */
-      color: #fff; /* White */
+    .form-button { /* Google form link button */ /* ← added */
+      display: block; /* ← added */
+      border: 1px solid var(--green); /* ← added */
+      border-radius: 20px; /* ← added */
+      color: #fff; /* ← added */
+      font-weight: 600; /* ← added */
+      text-align: center; /* ← added */
+      text-decoration: none; /* ← added */
+      padding: 14px; /* ← added */
+      margin: 0 auto 32px; /* ← added */
     }
-
-    #contact {                        /* Target the <section id="contact"> wrapper */
-  /* Option A: give it a fixed height */
-  height: 100px;                  /* ⬅ sets the section to exactly 60px tall */
-  /* Option B: give it more padding instead (pushes its content down & makes it taller) */
-  /* padding: 40px 20px; */       /* ⬅ 40px top/bottom, 20px left/right */
-}
-
-    
+    .socials { /* Social links area */ /* ← added */
+      text-align: center; /* ← added */
+    }
+    .socials h2 { /* Socials heading */ /* ← added */
+      font-size: 1.25rem; /* ← added */
+      margin-bottom: 16px; /* ← added */
+    }
+    .socials ul { /* Reset list */ /* ← added */
+      list-style: none; /* ← added */
+    }
+    .socials li { /* Individual social */ /* ← added */
+      margin: 8px 0; /* ← added */
+    }
 
   </style> <!-- End CSS -->
 </head>
@@ -435,23 +431,23 @@
       </div>
     </section>
 
-    <!-- CONTACT SECTION (two separate rows) -->
+    <!-- CONTACT US SECTION -->
     <section id="contact"> <!-- Contact section anchor -->
-      <div class="contact-row"> <!-- First contact row -->
-        <span class="label">Partnerships:</span> <!-- Label -->
-        partnerships@gamevault.com <!-- Partnership email -->
-      </div>
-      <div class="contact-row"> <!-- Second contact row -->
-        <span class="label">Support:</span> <!-- Label -->
-        support@gamevault.com <!-- Support email -->
-      </div>
+      <h1 style="color: #BDFF20; text-align: center; margin: 20px 0;">Contact US</h1> <!-- ← added -->
+      <div class="card"> <!-- ← added -->
+        <a href="#" class="form-button">Tap here google form link</a> <!-- ← added -->
+        <div class="socials"> <!-- ← added -->
+          <h2>GV Socials</h2> <!-- ← added -->
+          <ul> <!-- ← added -->
+            <li>@instagram</li> <!-- ← added -->
+            <li>@youtube etc</li> <!-- ← added -->
+            <li>linkedin</li> <!-- ← added -->
+          </ul> <!-- ← added -->
+        </div> <!-- ← added -->
+      </div> <!-- ← added -->
     </section>
 
-    <!-- SOCIALS PANEL -->
-    <div class="social-panel"> <!-- Social links area -->
-      <p>GV Socials</p>
-      <p>@instagram @youtube etc</p>
-    </div>
+
 
   </main> <!-- End main content -->
 
