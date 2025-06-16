@@ -26,6 +26,12 @@
       position: fixed; /* Fixed at top */
       top: 0; left: 0; width: 100%; /* Full-width, pinned to top-left */
       z-index: 100; /* Appear above other content */
+
+      /*this block will make the header semi-transparent and blur the background*/
+
+      background: rgba(0, 0, 0, 0.3);    /* semi-transparent black */
+  backdrop-filter: blur(10px);       /* blur everything behind */
+  -webkit-backdrop-filter: blur(10px); /* for Safari */
     }
     .logo { /* Logo text */
       color: #BDFF20; /* Bright green */
