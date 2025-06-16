@@ -1,591 +1,350 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GameVault E-Sports</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-  <!-- AOS for scroll animations -->
-  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/>
-
+  <title>GameVault Mobile Prototype</title>
   <style>
-    /* ─── CONTAINER VISIBILITY ─── */
-    .desktop-view { display: block; }
-    .mobile-view  { display: none;  }
-    @media (max-width: 768px) {
-      .desktop-view { display: none !important; }
-      .mobile-view  { display: block !important; }
-    }
-
-    /* ===== Global & Reset ===== */
-    html {
-      margin: 0; padding: 0; box-sizing: border-box;
-      overflow-x: hidden; overflow-y: auto;
-      scroll-behavior: smooth; scroll-padding-top: 120px;
-      font-family: 'Poppins', sans-serif;
-      background: #000; color: #fff; line-height: 1.5;
-    }
+    /* ── GLOBAL RESET & BASE ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0; padding: 0; box-sizing: inherit; overflow-y: visible;
-    }
-    *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: inherit;
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
     }
     a { color: inherit; text-decoration: none; }
 
-    /* ===== Header & Nav ===== */
-    #progress {
-      position: fixed; top: 0; left: 0; width: 0; height: 4px;
-      background: #BDFF20; z-index: 2000; transition: width .2s;
-    }
+    /* ── HEADER BAR ── */
     header {
-      position: fixed; top: 0; left: 0; width: 100%;
-      padding: 20px 60px;
-      background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-      display: flex; justify-content: space-between; align-items: center;
-      z-index: 1000; transition: background .3s;
+      background: #333;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 100;
     }
-    header.scrolled { background: rgba(0,0,0,0.6); }
     .logo {
-      font-size: 1.5rem; font-weight: 600; color: #BDFF20; cursor: pointer;
+      color: #BDFF20;
+      font-size: 1.25rem;
+      font-weight: 600;
     }
-    nav { display: flex; gap: 30px; }
-    nav a {
-      position: relative; padding: 4px 0; font-weight: 500;
+
+    /* ── SPACING BELOW FIXED HEADER ── */
+    main {
+      padding-top: 50px; /* header height */
     }
-    nav a::after {
-      content: ''; position: absolute;
-      left: 0; bottom: -2px; width: 100%; height: 2px;
+
+    /* ── HERO ── */
+    .hero {
+      background: #666;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .hero h1 .highlight {
+      color: #BDFF20;
+    }
+    .hero p {
+      font-size: 1rem;
+      color: #eee;
+      margin-bottom: 20px;
+    }
+    .hero .btn {
+      display: inline-block;
+      padding: 12px 24px;
       background: #BDFF20;
-      transform: scaleX(0); transform-origin: right;
-      transition: transform .3s;
-    }
-    nav a:hover::after,
-    nav a.active::after {
-      transform: scaleX(1); transform-origin: left;
-    }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; transition: transform .2s;
-    }
-    .hamburger span {
-      display: block; width: 20px; height: 2px;
-      background: #fff; border-radius: 2px;
-      transition: transform .3s, opacity .3s;
+      color: #000;
+      border-radius: 30px;
+      font-weight: 600;
     }
 
-    /* ===== Section Base ===== */
-    main { padding-top: 100px; }
-    .section {
-      max-width: 1200px; margin: 40px auto; padding: 0 60px;
-      scroll-margin-top: 135px; opacity: 1;
-      transform: translateY(0); transition: none;
-    }
-    .section-title {
-      text-align: center; font-size: 2rem; margin-bottom: 30px;
-      position: relative;
-    }
-    .section-title::after {
-      content: ''; width: 60px; height: 4px; background: #BDFF20;
-      position: absolute; left: 50%; transform: translateX(-50%);
-      bottom: -10px;
-    }
-
-    /* ===== Hero ===== */
-    #home.section {
-      max-width: none; width: 100vw; margin: 0; padding: 0;
-    }
-    main { padding-top: 0; }
-    #home {
-      background-image: url('assets/logo.jpg');
-      background-repeat: no-repeat; background-position: center;
-      background-size: cover; background-attachment: fixed;
-      min-height: 100vh; display: flex;
-      align-items: center; justify-content: center;
-      position: relative; padding: 0;
-    }
-    #home::after {
-      content: ''; position: absolute; inset: 0;
-      background: rgba(0,0,0,0.6);
-    }
-    .hero-content {
-      position: relative; z-index: 1;
-      text-align: center; max-width: 700px;
-    }
-    .hero-content h1 .highlight { color: #BDFF20; }
-    .hero-content h1 {
-      font-size: 4rem; margin-bottom: 20px; color: #fff;
-    }
-    .hero-content p {
-      font-size: 1.25rem; color: #ccc; margin-bottom: 30px;
-    }
-    .btn {
-      padding: 16px 48px; background: #BDFF20; color: #000;
-      font-weight: 600; border-radius: 30px;
-      transition: transform .3s;
-    }
-    .btn:hover { transform: scale(1.1) rotate(-1deg); }
-
-    /* ===== Reduce gap under section-nav ===== */
-    .section-nav + .section { margin-top: 10px; }
-
-    /* ===== About & Mission ===== */
-    .top-cards { display: flex; gap: 20px; margin-bottom: 20px; }
-    .top-cards .card {
-      flex: 1; background: #222; border-radius: 12px; padding: 24px;
-      overflow: hidden;
-    }
-    .top-cards .card h2 {
-      font-size: 1.8rem; margin-bottom: 12px; color: #fff;
-      position: relative; padding-bottom: 12px;
-    }
-    .top-cards .card h2::after {
-      content: ""; position: absolute; bottom: 4px; left: -25px;
-      width: 540px; height: 6px; background: #000; border-radius: 2px;
-    }
-    .top-cards .card p {
-      font-size: 1rem; color: #eee; line-height: 1.5;
-    }
-
-    /* ===== Section-Nav Heading ===== */
+    /* ── SECTION NAV LABEL ── */
     .section-nav {
-      font-size: 2rem; font-weight: 600; color: #BDFF20;
-      margin: 1px 0; padding: 2px 0; letter-spacing: 0.5px;
-      text-transform: uppercase; text-align: center;
+      text-align: center;
+      font-size: 1rem;
+      color: #fff;
+      margin: 20px 0;
+    }
+    .section-nav b { color: #BDFF20; }
+
+    /* ── ABOUT & MISSION CARDS ── */
+    .mobile-card {
+      background: #333;
+      border-radius: 8px;
+      margin: 0 20px 12px;
+      padding: 16px;
+    }
+    .mobile-card h2 {
+      font-size: 1.1rem;
+      color: #BDFF20;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .mobile-card p {
+      font-size: 0.9rem;
+      color: #ccc;
+      line-height: 1.4;
     }
 
-    /* ===== GV Goals ===== */
+    /* ── GV GOALS CARD ── */
     .goals-card {
-      background: #222; border-radius: 12px; padding: 40px 24px;
-      display: grid; grid-template-columns: auto 1fr 1fr;
-      grid-template-rows: auto auto; gap: 40px 24px;
-      align-items: start;
+      background: #333;
+      border-radius: 8px;
+      margin: 0 20px 20px;
+      padding: 16px;
     }
-    .goals-card .title-area {
-      grid-column: 1; grid-row: 1 / span 2;
-      position: relative; padding-right: 16px;
-    }
-    .goals-card .title-area h2 {
-      font-size: 2.5rem; line-height: 1.1; color: #fff; margin: 0;
-    }
-    .goals-card .title-area::after {
-      content: ""; position: absolute; top: 120px;
-      transform: translateY(-50%); right: 0;
-      width: 6px; height: 320px; background: #000;
-      border-radius: 2px;
+    .goals-card h2 {
+      font-size: 1.2rem;
+      color: #BDFF20;
+      text-align: center;
+      margin-bottom: 12px;
     }
     .goals-card h3 {
-      font-size: 1.2rem; margin-bottom: 8px; color: #fff;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 4px;
     }
     .goals-card p {
-      font-size: 0.95rem; color: #ccc; margin-top: 4px;
+      font-size: 0.85rem;
+      color: #ccc;
+      margin-bottom: 8px;
+      line-height: 1.3;
     }
 
-    /* ===== Events ===== */
-    #events .subheading {
-      font-size: 1.5rem; margin: 40px 0; color: #BDFF20;
-      text-align: center;
-    }
-    .event-list { display: grid; place-items: center; }
+    /* ── OUR EVENTS ── */
     .event-card {
-      display: flex; gap: 30px; background: #222;
-      border-radius: 8px; width: 100%; max-width: 1000px;
-      overflow: hidden; padding: 30px;
-      transition: transform .3s, box-shadow .3s;
+      background: #333;
+      border-radius: 8px;
+      margin: 0 20px 20px;
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
     }
-    .event-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    .event-card .details {
+      flex: 1;
+      font-size: 0.9rem;
+      color: #fff;
+      line-height: 1.4;
     }
-    .event-text { flex: 1; }
-    .event-text h4 {
-      margin-bottom: 12px; color: #fff;
+    .event-card .details h3 {
+      text-align: center;
+      margin-bottom: 8px;
     }
-    .event-text p {
-      margin-bottom: 8px; color: #ccc;
+    .event-card .poster img {
+      width: 100px;
+      border-radius: 4px;
     }
-    .event-poster {
-      flex: 0 0 40%;
-    }
-    .event-poster img {
-      display: block; width: 100%; height: auto;
-      border-radius: 6px;
-    }
-    .event-subtitle {
-      font-size: 1.2rem; color: #BDFF20;
-      margin-bottom: 16px; text-transform: uppercase;
-    }
-    .event-text.align-left   { text-align: left; }
-    .event-text.align-center { text-align: center; }
-    .event-text.align-right  { text-align: right; }
 
-    /* ===== Team ===== */
-    #team .team-members {
-      display: flex; flex-wrap: wrap; gap: 20px;
-      justify-content: center; perspective: 1000px;
-    }
-    .team-members > .section-title {
-      flex: 0 0 100%; margin: 30px 0; text-align: center;
+    /* ── GV TEAM ── */
+    .team-grid {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 0 20px 20px;
     }
     .team-card {
-      flex: 1; max-width: 48%; background: #222;
-      padding: 16px; border-radius: 12px;
-      text-align: center; transition: transform .3s;
-      display: flex; flex-direction: column; align-items: center;
+      background: #333;
+      border-radius: 8px;
+      min-width: 100px;
+      padding: 12px;
+      text-align: center;
     }
-    .team-card:hover { transform: translateY(-10px); }
-    .team-card img {
-      width: 200px; height: 200px; object-fit: cover;
-      border-radius: 50%; margin-bottom: 16px; display: block;
+    .team-card .avatar {
+      width: 60px;
+      height: 60px;
+      background: #555;
+      border-radius: 50%;
+      margin: 0 auto 8px;
     }
-    .team-card.horizontal {
-      flex: 0 0 auto; width: 360px; height: 280px;
-      padding: 24px 32px; position: relative; overflow: hidden;
-      display: flex; justify-content: space-between;
-      align-items: center; text-align: left;
-    }
-    .team-card.horizontal .text-container,
-    .team-card.horizontal img {
-      position: absolute; top: 50%; transform: translateY(-50%);
-    }
-    .team-card.horizontal.sam .text-container {
-      left: 120px; text-align: center;
-    }
-    .team-card.horizontal.sam img {
-      right: 24px; width: 120px; height: 120px; border-radius: 50%;
-    }
-    .team-card.horizontal.niel img {
-      left: 24px; width: 120px; height: 120px; border-radius: 50%;
-    }
-    .team-card.horizontal.niel .text-container {
-      right: 150px; text-align: center;
-    }
-    .team-card.horizontal .text-container {
-      display: flex; flex-direction: column; justify-content: center;
-      flex: 1;
-    }
-    .team-card.horizontal .text-container h3 {
-      font-size: 1.5rem; margin-bottom: 4px;
-    }
-    .team-card.horizontal .text-container p {
-      font-size: 1rem;
+    .team-card p {
+      font-size: 0.85rem;
+      color: #fff;
+      line-height: 1.2;
     }
 
-    /* ===== Contact ===== */
-    #contact { padding: 80px 0; background: #000; }
-    .contact-main-row {
-      display: flex; justify-content: space-between;
-      align-items: center; max-width: 800px;
-      margin: 0 auto 24px;
+    /* ── GAMERS TEAM ── */
+    .gamers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 0 20px 20px;
     }
-    .contact-item {
-      display: flex; flex-direction: column;
-      justify-content: center;
+    .gamers-card {
+      background: #333;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
     }
-    .contact-item.partnerships { margin-left: 50px; }
-    .contact-item.support      { margin-right: 50px; }
-    .contact-item .label { font-weight: 600; margin-bottom: 4px; }
-    .contact-item .email a { font-size: 1rem; }
+    .gamers-card .avatar {
+      width: 60px;
+      height: 60px;
+      background: #555;
+      border-radius: 50%;
+      margin: 0 auto 8px;
+    }
+    .gamers-card p {
+      font-size: 0.75rem;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    /* ── CONTACT & SOCIALS ── */
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin: 0 20px;
+      padding: 12px 0;
+    }
+    .contact-row .label { font-weight: 600; }
     .social-panel {
-      background: #222; border-radius: 12px; padding: 24px;
-      max-width: 800px; margin: 0 auto; text-align: center;
-    }
-    .social-panel h4 { color: #fff; font-size: 1.25rem; margin-bottom: 8px; }
-    .social-panel p  { color: #ccc; font-size: 1rem; }
-
-    .close-btn { display: none; }
-
-    /* ===== Desktop → Mobile Overrides ===== */
-    @media (max-width: 768px) {
-      html, body { overflow-x: hidden; }
-      header { padding: 20px 1rem; }
-      nav { display: none; }
-      .hamburger { display: flex; transform: scale(0.9); }
-      nav.mobile-open {
-        display: flex; flex-direction: column;
-        position: fixed; top: 0; right: 0;
-        width: 80%; height: 100vh;
-        background: rgba(0,0,0,0.95);
-        padding: 4rem 1.5rem;
-        box-shadow: -4px 0 8px rgba(0,0,0,0.5);
-        z-index: 1000;
-      }
-      nav.mobile-open .close-btn {
-        display: block; position: absolute; top: 1rem; right: 1rem;
-        font-size: 2rem; cursor: pointer;
-      }
-      nav.mobile-open a {
-        padding: 1rem 0; border-bottom: 1px solid #333;
-      }
-      .section { max-width: none; padding: 0 1rem; margin: 1.5rem auto; }
-      .top-cards { flex-direction: column; }
-      .goals-card {
-        display: block; background: #222; border-radius: 12px;
-        padding: 1rem; margin-bottom: 2rem;
-      }
-      .goals-card .title-area { margin-bottom: 1rem; }
-      .goals-card .title-area h2 {
-        font-size: 1.75rem; color: #BDFF20; margin: 0;
-      }
-      .goals-card .goal { margin-bottom: 1.5rem; }
-      .goals-card .goal h3 {
-        font-size: 1.25rem; font-weight: 600; color: #fff;
-        margin-bottom: 0.25rem;
-      }
-      .goals-card .goal p {
-        font-size: 1rem; color: #eee; line-height: 1.4; margin: 0;
-      }
-      .event-card { flex-direction: column; width: 100%; margin: 0 auto; }
-      .event-card .event-poster { width: 100%; }
-      #team .team-card, #contact .contact-info { max-width: 100%; }
-      #home { background-attachment: scroll; }
-      .section-nav + .section { margin-top: 10px; }
+      background: #333;
+      border-radius: 8px;
+      margin: 0 20px 20px;
+      padding: 12px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <div class="desktop-view">
-    <div id="progress"></div>
-    <header>
-      <div class="logo">GameVault</div>
-      <div class="hamburger" onclick="toggleNav()">
-        <span></span><span></span><span></span>
-      </div>
-      <nav id="mainNav">
-        <span class="close-btn" onclick="closeNav()">×</span>
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About GV</a>
-        <a href="#events">Our Events</a>
-        <a href="#team">Our Team</a>
-        <a href="#contact">Get in Touch</a>
-      </nav>
-    </header>
+  <header>
+    <div class="logo">GameVault</div>
+  </header>
 
-    <main>
-      <!-- HERO -->
-      <section id="home" class="section" data-aos="fade-up">
-        <div class="hero-content">
-          <h1>Want to <span class="highlight">Know GameVault?</span></h1>
-          <p>Transforming esports into a healthier, more inclusive, and truly engaging experience.</p>
-          <a href="#about" class="btn">Dive in!</a>
-        </div>
-      </section>
-
-      <!-- ABOUT & GOALS -->
-      <div class="section-nav"><b>‹ Know GameVault ›</b></div>
-      <section id="about" class="section" data-aos="fade-up">
-        <div class="top-cards">
-          <div class="card" data-aos="fade-right">
-            <h2>ABOUT US</h2>
-            <p>At GameVault, we believe competitive gaming should elevate – not overwhelm – its community. We are on a mission to foster a transparent, informative, and non-addictive E-Sports ecosystem, where thrill and skill go hand in hand with mental well-being.</p>
-          </div>
-          <div class="card" data-aos="fade-left">
-            <h2>Our Mission</h2>
-            <p>To create a safe, inclusive, and supportive space where gamers can compete, learn, and grow without the stress and pressure of traditional gaming environments. We strive to build a community that values respect, balance, and healthy gaming habits.</p>
-          </div>
-        </div>
-
-        <!-- GV Goals -->
-        <div class="goals-card" data-aos="zoom-in">
-          <div class="title-area">
-            <h2>GV<br>Goals</h2>
-          </div>
-          <div class="goal promote">
-            <h3>Promote Healthy Gameplay</h3>
-            <p>Encourage regular breaks, mental health awareness, and a culture of respect and inclusivity.</p>
-          </div>
-          <div class="goal provide">
-            <h3>Provide Open Information</h3>
-            <p>Deliver transparent resources that empower players to make informed gaming decisions.</p>
-          </div>
-          <div class="goal fun">
-            <h3>Addiction-Free Fun</h3>
-            <p>Thoughtful scheduling, reasonable match lengths, and wellness tips ensure gaming stays a passion, not a pitfall.</p>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-nav"><b>‹ Our Events ›</b></div>
-      <section id="events" class="section" data-aos="fade-up">
-        <div class="event-list">
-          <div class="event-card" data-aos="fade-right">
-            <div class="event-text align-center">
-              <h5 class="event-subtitle">Upcoming Tournament</h5>
-              <h4>Barh Summer Royale BGMI Tournament</h4>
-              <p>Duration: 1 Day</p>
-              <p>Date: to be decided</p>
-              <p>Prize: 4000 Day</p>
-              <p>Location: Barh, Bihar</p>
-              <p>Venue: To be decided</p>
-              <p>Click for registration</p>
-              <p>Rules:</p>
-              <p>1. Only Squad entry</p>
-              <p>2. Barh Subdivision Gamers</p>
-            </div>
-            <div class="event-poster">
-              <img src="assets/p.png" alt="Event Poster"/>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-nav"><b>‹ GV Team ›</b></div>
-      <section id="team" class="section" data-aos="fade-up">
-        <div class="team-members">
-          <div class="team-card horizontal sam" data-aos="flip-left">
-            <div class="text-container">
-              <h3>Samar</h3><p>CEO</p>
-            </div>
-            <img src="assets/samar.jpg" alt="Samar Kumar"/>
-          </div>
-          <div class="team-card horizontal niel" data-aos="flip-right">
-            <img src="assets/niel.jpg" alt="Niel Kamal"/>
-            <div class="text-container">
-              <h3>Niel</h3><p>CEO</p>
-            </div>
-          </div>
-        </div>
-        <div class="section-title">GV Gamers Team</div>
-        <div class="team-members">
-          <div class="team-card" data-aos="flip-left">
-            <img src="assets/Kajal.jpg" alt="The Spooter"/>
-            <h3>The Spooter (BGMI)</h3>
-            <p>Elite FPS team known for strategic gameplay and teamwork.</p>
-          </div>
-          <div class="team-card" data-aos="flip-up">
-            <img src="assets/render.jpg" alt="Render Expert"/>
-            <h3>Render Expert (BGMI/CODM)</h3>
-            <p>High-octane MOBA specialists with regional championships.</p>
-          </div>
-          <div class="team-card" data-aos="flip-right">
-            <img src="assets/deep.jpg" alt="The K/D guy"/>
-            <h3>The K/D guy (BGMI)</h3>
-            <p>Battle royale experts dominating local tournaments.</p>
-          </div>
-          <div class="team-card" data-aos="fade-up">
-            <img src="assets/beginner.jpg" alt="The Beginner"/>
-            <h3>The Beginner (BGMI/CODM)</h3>
-            <p>Battle royale experts dominating local tournaments.</p>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-nav"><b>‹ Want to Talk to Us ›</b></div>
-      <section id="contact" class="section">
-        <div class="contact-main-row">
-          <div class="contact-item partnerships">
-            <p class="label">Partnerships:</p>
-            <p class="email"><a href="mailto:partnerships@gamevault.com">partnerships@gamevault.com</a></p>
-          </div>
-          <div class="contact-item support">
-            <p class="label">Support:</p>
-            <p class="email"><a href="mailto:support@gamevault.com">support@gamevault.com</a></p>
-          </div>
-        </div>
-        <div class="social-panel">
-          <h4>GV Socials</h4>
-          <p>@instagram @youtube etc</p>
-        </div>
-      </section>
-    </main>
-
-    <!-- AOS & Custom Scripts -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-      AOS.init({ duration:800, offset:100, once:false, mirror:true });
-      document.querySelectorAll('nav a').forEach(a =>
-        a.addEventListener('click', () => setTimeout(() => AOS.refresh(), 500))
-      );
-      window.addEventListener('scroll', () => {
-        const h = document.documentElement,
-              pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-        document.getElementById('progress').style.width = pct + '%';
-        document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
-        document.querySelectorAll('nav a').forEach(a => {
-          const sec = document.querySelector(a.getAttribute('href'));
-          a.classList.toggle('active',
-            sec &&
-            sec.offsetTop <= window.scrollY + 200 &&
-            sec.offsetTop + sec.offsetHeight > window.scrollY + 200
-          );
-        });
-      });
-      function toggleNav() {
-        const nav    = document.getElementById('mainNav'),
-              burger = document.querySelector('.hamburger');
-        nav.classList.toggle('mobile-open');
-        burger.classList.toggle('open');
-      }
-      function closeNav() {
-        const nav    = document.getElementById('mainNav'),
-              burger = document.querySelector('.hamburger');
-        if (nav.classList.contains('mobile-open')) {
-          nav.classList.remove('mobile-open');
-          burger.classList.remove('open');
-        }
-      }
-      document.querySelectorAll('#mainNav a').forEach(link => {
-        link.addEventListener('click', (e) => {
-          const targetHash = link.getAttribute('href');
-          if (window.location.hash === targetHash) e.preventDefault();
-          closeNav();
-        });
-      });
-    </script>
-  </div><!-- /.desktop-view -->
-
-  <div class="mobile-view">
-    <!-- HEADER BAR -->
-    <header>
-      <div class="logo">GameVault</div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section id="home">
-      <div class="hero-content">
-        <h1>Want to <span class="highlight">Know GameVault?</span></h1>
-        <p>Transforming esports into a healthier, more inclusive, and truly engaging experience.</p>
-        <a href="#about" class="btn">Dive In!</a>
-      </div>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>
+        Want to<br>
+        <span class="highlight">Know</span><br>
+        GameVault?
+      </h1>
+      <p>Transforming esports into a healthier, more inclusive, and truly engaging experience.</p>
+      <a href="#about" class="btn">Dive In!!</a>
     </section>
 
-    <!-- MOBILE NAVIGATION LABEL -->
+    <!-- KNOW GAMEVAULT LABEL -->
     <div class="section-nav">△ <b>Know GameVault</b> △</div>
 
-    <!-- ABOUT US CARD -->
-    <div class="mobile-card" id="about">
+    <!-- ABOUT US -->
+    <section class="mobile-card" id="about">
       <h2>ABOUT US</h2>
       <p>
         At GameVault, we believe competitive gaming should elevate – not overwhelm – its community. We are on a mission to foster a transparent, informative, and non-addictive E-Sports ecosystem, where thrill and skill go hand in hand with mental well-being.
       </p>
-    </div>
+    </section>
 
-    <!-- OUR MISSION CARD -->
-    <div class="mobile-card" id="mission">
+    <!-- OUR MISSION -->
+    <section class="mobile-card" id="mission">
       <h2>Our Mission</h2>
       <p>
         To create a safe, inclusive, and supportive space where gamers can compete, learn, and grow without the stress and pressure of traditional gaming environments. We strive to build a community that values respect, balance, and healthy gaming habits.
       </p>
-    </div>
+    </section>
 
-    <!-- GV GOALS CARD -->
-    <div class="goals-card" id="goals">
+    <!-- GV GOALS -->
+    <section class="goals-card" id="goals">
       <h2>GV Goals</h2>
-      <div class="provide">
+      <div>
         <h3>Provide Open Information</h3>
         <p>Deliver transparent resources that empower players to make informed gaming decisions.</p>
       </div>
-      <div class="promote">
+      <div>
         <h3>Promote Healthy Gameplay</h3>
         <p>Encourage regular breaks, mental health awareness, and a culture of respect and inclusivity.</p>
       </div>
-      <div class="fun">
+      <div>
         <h3>Addiction-Free Fun</h3>
         <p>Thoughtful scheduling, reasonable match lengths, and wellness tips ensure gaming stays a passion, not a pitfall.</p>
       </div>
+    </section>
+
+    <!-- OUR EVENTS -->
+    <div class="section-nav">◀ Our Events ▶</div>
+    <section>
+      <div class="event-card">
+        <div class="details">
+          <h3>Upcoming Events</h3>
+          <p><strong>Event Details :</strong> Barh Summer Royale BGMI Tournament</p>
+          <p><strong>Duration:</strong> 1 Day</p>
+          <p><strong>Date:</strong> to be decided</p>
+          <p><strong>Prize:</strong> 4000 Day</p>
+          <p><strong>Location:</strong> Barh, Bihar</p>
+          <p><strong>Venue:</strong> To be decided</p>
+          <p>Click for registration</p>
+          <p><strong>Rules:</strong></p>
+          <p>1. Only Squad entry</p>
+          <p>2. Barh Subdivision Gamers</p>
+        </div>
+        <div class="poster">
+          <img src="assets/p.png" alt="Event Poster">
+        </div>
+      </div>
+    </section>
+
+    <!-- GV TEAM -->
+    <div class="section-nav">◀ GV Team ▶</div>
+    <section class="team-grid">
+      <div class="team-card">
+        <div class="avatar"></div>
+        <p>Samar<br>CEO</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar"></div>
+        <p>Niel<br>CEO</p>
+      </div>
+    </section>
+
+    <!-- GAMERS TEAM -->
+    <div class="section-nav">◀ Gamers Team ▶</div>
+    <section class="gamers-grid">
+      <div class="gamers-card">
+        <div class="avatar"></div>
+        <p>Kajal (BGMI)<br>The Spotter</p>
+      </div>
+      <div class="gamers-card">
+        <div class="avatar"></div>
+        <p>Deep (BGMI)<br>The 1 vs 4</p>
+      </div>
+      <div class="gamers-card">
+        <div class="avatar"></div>
+        <p>Gamer 3 caption</p>
+      </div>
+      <div class="gamers-card">
+        <div class="avatar"></div>
+        <p>Gamer 4 (BGMI)<br>caption</p>
+      </div>
+      <div class="gamers-card">
+        <div class="avatar"></div>
+        <p>Gamer 5 (BGMI)<br>caption</p>
+      </div>
+      <div class="gamers-card">
+        <div class="avatar"></div>
+        <p>Gamer 6 caption</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <div class="contact-row">
+      <div><span class="label">Partnerships:</span> partnerships@gamevault.com</div>
+      <div class="section-nav"><b>Want to Talk to Us</b></div>
+      <div><span class="label">Support:</span> support@gamevault.com</div>
     </div>
-  </div><!-- /.mobile-view -->
+
+    <!-- SOCIALS PANEL -->
+    <div class="social-panel">
+      <p>GV Socials</p>
+      <p>@instagram @youtube etc</p>
+    </div>
+  </main>
 </body>
 </html>
+```
