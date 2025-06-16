@@ -239,6 +239,8 @@
     }
 
     /* ── CONTACT ROWS (split into two separate rows) ── */  
+
+    
     /* Newly added: two distinct rows for partnership and support */
     .contact-row { /* Contact row styling */
       margin: 12px 20px; /* Vertical and horizontal margin */
@@ -252,12 +254,6 @@
     }
 
 
-
-
-
-
-
-
     /* ── SOCIALS PANEL ── */
     .social-panel { /* Social icons/text box */
       background: #333; /* Dark grey */
@@ -268,6 +264,15 @@
       font-size: 0.9rem; /* Slightly smaller */
       color: #fff; /* White */
     }
+
+    #contact {                        /* Target the <section id="contact"> wrapper */
+  /* Option A: give it a fixed height */
+  height: 100px;                  /* ⬅ sets the section to exactly 60px tall */
+  /* Option B: give it more padding instead (pushes its content down & makes it taller) */
+  /* padding: 40px 20px; */       /* ⬅ 40px top/bottom, 20px left/right */
+}
+
+    
 
   </style> <!-- End CSS -->
 </head>
