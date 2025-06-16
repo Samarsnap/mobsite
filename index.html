@@ -238,6 +238,22 @@
       line-height: 1.2; /* Readable */
     }
 
+
+    /* ONLY enlarge Samar & Niel’s cards */
+.team-card.samar,
+.team-card.niel {
+  width: 140px;      /* exact width for those two */
+  height: 160px;     /* exact height for those two */
+  padding: 20px;     /* extra inner spacing */
+  /* if you need to keep their contents centered: */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+    
+    
+
     /* ── CONTACT ROWS (split into two separate rows) ── */  
 
     
