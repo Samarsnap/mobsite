@@ -28,8 +28,9 @@
       z-index: 100; /* Appear above other content */
 
 /*this block will make the header semi-transparent and blur the background*/
+  /* make header background match the hero’s overlay */
 
-      background: rgba(0, 0, 0, 0.3);    /* semi-transparent black */
+      background: rgba(0, 0, 0, 0.5);    /* semi-transparent black */
   backdrop-filter: blur(10px);       /* blur everything behind */
   -webkit-backdrop-filter: blur(10px); /* for Safari */
 
@@ -46,7 +47,11 @@
       color: #BDFF20; /* Bright green */
       cursor: pointer; /* Pointer on hover */
     }
+
+    /* if your nav‐menu slides out over the page you can do the same */
+    /* ── NAV MENU ── */
     .nav-menu { /* Hidden nav menu panel */
+
       display: none; /* Hidden by default */
       position: fixed; /* Fixed position */
       top: 50px; /* Just below header (header height = 50px) */
@@ -76,10 +81,23 @@
 
     /* ── HERO ── */
     .hero { /* Hero section */
-      background: #666; /* Medium grey */
-      text-align: center; /* Center-align text */
-      padding: 260px 20px; /* 240px vertical, 20px horizontal */
-    }
+/* 1. Your background image (update with your actual file) */
+  /* 1) Remove any .hero::before overlay you added */
+
+  margin-top: -50px;                     /* pull hero up beneath the 50px header */
+  padding-top: calc(260px + 50px);       /* add that 50px back so content stays in view */
+  position: relative;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('assets/sky.jpg') center/cover no-repeat;
+  position: relative;   /* establish a positioning context */
+  overflow: hidden;     /* clip the overlay to the hero bounds */
+
+    /* 2. Keep your layout & centering for the text and button */
+
+  text-align: center; /* Center-align text */
+  padding: 260px 20px; /* 260px vertical, 20px horizontal */
+}
+
     .hero h1 { /* Hero headline */
       font-size: 2rem; /* 2× root font-size */
       line-height: 1.2; /* 1.2× line height */
@@ -175,7 +193,8 @@
 
 
 
-/* 1. Modern: give #events breathing room under the fixed header */
+/* 1. Modern: give #events breathing room under the fixed header 
+fix the scroll margin and height */
 #events { /* Section ID for "Know GameVault" */
   scroll-margin-top: 60px; /* <-- match this to your header height */
 }
@@ -214,13 +233,24 @@
       text-align: center; /* Centered */
       margin-bottom: 8px; /* Spacing */
     }
+
+.event-card .poster {
+  align-self: center;  /* moves the poster div to horizontal center */
+}
+
+
     .event-card .poster img { /* Event poster image */
      width: 80%;       /* or whatever fits: 100%, 200px, etc */
-  max-width: 300px; /* safeguard larger screens */
+  max-width: 450px; /* safeguard larger screens */
   height: auto;     /* maintain aspect ratio */
   display: block;   /* so margin auto works if you need it */
+   border-radius: 20px; /* ← smooths the corners */
     }
-    
+
+
+    .event-card .poster {
+  text-align: center;  /* center inline or inline-block children */
+}
 
     /* ── GV TEAM ── */
     .team-grid { /* Team cards container */
@@ -346,9 +376,11 @@
       margin: 8px 0; /* ← added */
     }
 
+
   </style> <!-- End CSS -->
 </head>
-<body> <!-- Begin page body -->
+
+
 
   <!-- HEADER -->
   <header> <!-- Fixed header at top -->
