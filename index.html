@@ -78,7 +78,7 @@
     .hero { /* Hero section */
       background: #666; /* Medium grey */
       text-align: center; /* Center-align text */
-      padding: 200px 20px; /* 120px vertical, 20px horizontal */
+      padding: 240px 20px; /* 240px vertical, 20px horizontal */
     }
     .hero h1 { /* Hero headline */
       font-size: 2rem; /* 2× root font-size */
@@ -106,7 +106,7 @@
     /* ── SECTION NAV LABEL ── */
     .section-nav { /* Section labels */
       text-align: center; /* Center text */
-      font-size: 1.7rem; /* Normal font */
+      font-size: 1.7rem; /* Normal font heading font change */ 
       color: #BDFF20; /* White */
       margin: 25px 0; /* Vertical spacing */
     }
@@ -197,10 +197,13 @@
       border-radius: 8px; /* Rounded corners */
       margin: 0 20px 20px; /* Spacing */
       padding: 16px; /* Internal padding */
-      display: flex; /* Side-by-side layout */
-      gap: 12px; /* Gap between children */
-      align-items: flex-start; /* Align top edges */
-    }
+/* ↓ change here ↓ */
+  display: flex;              
+  flex-direction: column;     /* stack children vertically */
+  gap: 12px;                  /* space between description & poster */
+  align-items: flex-start;    /* align items to the left */
+}
+
     .event-card .details { /* Event text details */
       flex: 1; /* Take remaining space */
       font-size: 0.9rem; /* Slightly smaller */
@@ -299,6 +302,12 @@
     }
 
     /* ── CONTACT US CARD ── */
+/* Change the Contact Us heading size */
+#contact-us > h1 {
+  font-size: 1.7rem;      /* adjust to taste: 1.5rem, 24px, etc. */
+}
+
+
     :root { /* color variables */ /* ← added */
       --green: #BDFF20; /* ← added */
       --card-bg: #1a1a1a; /* ← added */
@@ -353,7 +362,7 @@
     <a href="#know-gv">Know GV</a> <!-- Scroll to about -->
     <a href="#events">Our Events</a> <!-- Scroll to events -->
     <a href="#GV Teams">GV Team</a> <!-- Scroll to team -->
-    <a href="#contact Us">Contact Us</a> <!-- Scroll to contact -->
+    <a href="#contact-us">Contact Us</a> <!-- Scroll to contact -->
   </div>
 
   <!-- MAIN CONTENT -->
@@ -478,8 +487,12 @@
     </section>
 
     <!-- CONTACT US SECTION -->
-    <section id="contact Us"> <!-- Contact section anchor -->
-      <h1 style="color: #BDFF20; text-align: center; margin: 20px 0;">Contact Us</h1> <!-- ← added -->
+
+    <section id="contact-us"> <!-- Contact section anchor -->
+    <div class="section-nav"></div>
+
+      <h1 style="color: #BDFF20; text-align: center; margin: 20px 0;">
+        △ Contact Us △</h1> <!-- ← added -->
       <div class="card"> <!-- ← added -->
         <a href="#" class="form-button">Tap here google form link</a> <!-- ← added -->
         <div class="socials"> <!-- ← added -->
