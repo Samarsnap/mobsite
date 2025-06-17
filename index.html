@@ -240,17 +240,20 @@ fix the scroll margin and height */
 
 
     .event-card .poster img { /* Event poster image */
+display: block;      /* so margin auto works */
+  margin: 0 auto;      /* horizontally center the image */
+
      width: 80%;       /* or whatever fits: 100%, 200px, etc */
   max-width: 450px; /* safeguard larger screens */
   height: auto;     /* maintain aspect ratio */
   display: block;   /* so margin auto works if you need it */
    border-radius: 20px; /* ← smooths the corners */
+     display: block;      /* so margin auto works */
+  margin: 0 auto;      /* horizontally center the image */
     }
 
 
-    .event-card .poster {
-  text-align: center;  /* center inline or inline-block children */
-}
+    
 
     /* ── GV TEAM ── */
     .team-grid { /* Team cards container */
